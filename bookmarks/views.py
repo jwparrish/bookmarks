@@ -4,12 +4,12 @@ from django.template.loader import get_template
 from django.contrib.auth.models import User
 from django.shortcuts import render_to_response
 from django.contrib.auth import logout
+from django.template import RequestContext
 
 
 def main_page(request):
 	return render_to_response(
-		'main_page.html',
-		{  'user': request.user }
+		'main_page.html', RequestContext(request)
 	)
 	
 def user_page(request, username):
@@ -19,12 +19,11 @@ def user_page(request, username):
 		raise Http404('Requested user not found.')
 	bookmarks = user.bookmark_set.all()
 	template = get_template('user_page.html')
-	variables = Context({
+	variables = RequestContext(request, {
 		'username': username,
 		'bookmarks': bookmarks,
 	})
-	output = template.render(variables)
-	return HttpResponse(output)
+	return render_to_response('user_page.html', variables)
 	
 def logout_page(request):
 	logout(request)
