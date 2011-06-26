@@ -24,7 +24,7 @@ urlpatterns = patterns('',
 		{ 'document_root': site_media }),
 	(r'^register/$', register_page),
 	(r'^register/success/$', direct_to_template,
-		{ 'template': 'registration/register_success.html' })
+		{ 'template': 'registration/register_success.html' }),
 	
 	#Account management
 	(r'save/$', bookmark_save_page),

@@ -63,7 +63,7 @@ def bookmark_save_page(request):
 			# Update bookmark title.
 			bookmark.title = form.cleaned_data['title']
 			# If the bookmark is being updated, clear old tag list.
-			If not created:
+			if not created:
 				bookmark.tag_set.clear()
 			# Create new tag list.
 			tag_names = form.cleaned_data['tags'].split()
