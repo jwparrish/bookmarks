@@ -27,5 +27,5 @@ urlpatterns = patterns('',
 		{ 'template': 'registration/register_success.html' }),
 	
 	#Account management
-	(r'save/$', bookmark_save_page),
+	(r'^save/$', bookmark_save_page),
 )

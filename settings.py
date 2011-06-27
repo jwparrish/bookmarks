@@ -1,5 +1,6 @@
 # Django settings for django_bookmarks project.
 import os.path
+import django.contrib.auth
 
 
 DEBUG = True
@@ -149,3 +150,5 @@ LOGGING = {
         },
     }
 }
+
+LOGIN_URL = '/login/'
