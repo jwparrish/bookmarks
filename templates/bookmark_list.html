@@ -10,7 +10,9 @@
 					{% if bookmark.tag_set.all %}
 						<ul class="tags">
 							{% for tag in bookmark.tag_set.all %}
-								<li>{{ tag.name }}</li>
+								<li>
+									<a href="/tag/{{ tag.name }}/">{{ tag.name }}</a>
+								</li>
 							{% endfor %}
 						</ul>
 					{% else %}
