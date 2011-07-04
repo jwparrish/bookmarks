@@ -15,3 +15,7 @@ ul.tags, ul.tags li{display: inline; margin: 0; padding: 0;}
 .tag-cloud-3 { font-size: 160%; }
 .tag-cloud-4 { font-size: 180%; }
 .tag-cloud-5 { font-size: 200%; }
+
+ul.bookmarks .edit {
+	font-size: 70%;
+}
