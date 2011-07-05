@@ -11,9 +11,13 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 
 def main_page(request):
-	return render_to_response(
-		'main_page.html', RequestContext(request)
-	)
+	shared_bookmarks = SharedBookmark.objects.order_by(
+		'-date'
+	)[:10]
+	variables = RequestContext(request, {
+		'shared_bookmarks': shared_bookmarks
+	})
+	return render_to_response('main_page.html', variables)
 	
 def user_page(request, username):
 	user = get_object_or_404(User, username=username)
@@ -180,7 +184,15 @@ def _bookmark_save(request, form):
 	for tag_name in tag_names:
 		tag, dummy = Tag.objects.get_or_create(name=tag_name)
 		bookmark.tag_set.add(tag)
-	# Save bookmark to database.
+	#Share on the main page if requested.
+	if form.cleaned_data['share']:
+		shared_bookmark, created = SharedBookmark.objects.get_or_create(
+			bookmark=bookmark
+		)
+		if created:
+			shared_bookmark.users_voted.add(request.user)
+			shared_bookmark.save()
+	# Save bookmark to database and return it.
 	bookmark.save()
 	return bookmark
 	
