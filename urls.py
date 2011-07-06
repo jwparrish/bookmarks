@@ -34,4 +34,5 @@ urlpatterns = patterns('',
 	
 	#Account management
 	(r'^save/$', bookmark_save_page),
+	(r'^vote/$', bookmark_vote_page),
 )

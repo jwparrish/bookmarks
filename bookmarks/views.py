@@ -203,4 +203,23 @@ def ajax_tag_autocomplete(request):
 		return HttpResponse('\n'.join(tag.name for tag in tags))
 	return HttpResponse()
 	
+@login_required
+def bookmark_vote_page(request):
+	if request.GET.has_key('id'):
+		try:
+			id = request.GET['id']
+			shared_bookmark = SharedBookmark.objects.get(id=id)
+			user_voted = shared_bookmark.users_voted.filter(
+				username=request.user.username
+			)
+			if not user_voted:
+				shared_bookmark.votes += 1
+				shared_bookmark.users_voted.add(request.user)
+				shared_bookmark.save()
+		except ObjectDoesNotExist:
+			raise Http404('Bookmark not found.')
+	if request.META.has_key('HTTP_REFERER'):
+		return HttpResponseRedirect(request.META['HTTP_REFERER'])
+	return HttpResponseRedirect('/')
+	
 	
