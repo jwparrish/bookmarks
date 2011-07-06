@@ -2,6 +2,8 @@
 	<ul class="bookmarks">
 		{% for shared_bookmark in shared_bookmarks %}
 			<li>
+				<a href="/vote/?id={{ shared_bookmark.id }}"
+					class="vote">[+]</a>
 				<a href="{{ shared_bookmark.bookmark.link.url }}"
 					class="title">
 					{{ shared_bookmark.bookmark.title|escape }}</a>
