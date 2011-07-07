@@ -12,6 +12,8 @@ site_media = os.path.join(
 )
 
 urlpatterns = patterns('',
+	#Comments
+	(r'^comments/', include('django.contrib.comments.urls.comments')),
 
 	#Ajax
 	(r'^ajax/tag/autocomplete/$', ajax_tag_autocomplete),
@@ -22,6 +24,8 @@ urlpatterns = patterns('',
 	(r'^tag/([^\s]+)/$', tag_page),
 	(r'^tag/$', tag_cloud_page),
 	(r'^search/$', search_page),
+	(r'^popular/$', popular_page),
+	(r'^bookmark/(\d+)/$', bookmark_page),
 
 	#Session management
 	(r'^login/$', 'django.contrib.auth.views.login'),
