@@ -13,7 +13,8 @@
 					class="username">
 					{{ shared_bookmark.bookmark.user.username }}</a> |
 				<span class="vote-count">Votes:
-					{{ shared_bookmark.votes }}</span>
+					{{ shared_bookmark.votes }}</span> |
+				<a href="/bookmark/{{ shared_bookmark.id }}/">Comments</a>
 			</li>
 		{% endfor %}
 	</ul>
