@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load comments %}
+
 {% block title %}Bookmark:
 	{{ shared_bookmark.bookmark.title|escape }}{% endblock %}
 {% block head %}
@@ -14,4 +16,18 @@
 		class="username">
 		{{ shared_bookmark.bookmark.user.username }}</a> |
 	<span class="vote-count">Votes: {{ shared_bookmark.votes }}</span>
+	<h2>Comments</h2>
+	{% get_comment_count for bookmarks.sharedbookmark
+		shared_bookmark.id as comment_count %}
+	{% get_comment_list for bookmarks.sharedbookmark
+		shared_bookmark.id as comment_list %}
+	{% for comment in comment_list %}
+		<div class="comment">
+			<p><b>{{ comment.user.username }}</b> said:</p>
+			{{ comment.comment|escape|urlizetrunc:40|linebreaks }}
+		</div>
+	{% endfor %}
+	<p>Number of comments: {{ comment_count }}</p>
+	{% comment_form for bookmarks.sharedbookmark
+		shared_bookmark.id %}
 {% endblock %}
