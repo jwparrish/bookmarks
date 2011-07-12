@@ -14,7 +14,6 @@ site_media = os.path.join(
 urlpatterns = patterns('',
 	#Comments
 	(r'^comments/', include('django.contrib.comments.urls')),
-	#(r'^comments/', include('django.contrib.comments.urls.comments')),
 
 	#Ajax
 	(r'^ajax/tag/autocomplete/$', ajax_tag_autocomplete),

@@ -1,5 +1,8 @@
 {% if user.is_authenticated %}
 	<form action="/comments/post/" method="post">
+		{% for hidden in form.hidden_fields %}
+			{{ hidden }}
+		{% endfor %}
 		<p><label>Post a comment:</label><br />
 		<textarea name="comment" rows="10"
 			cols="60"></textarea></p>
@@ -9,6 +12,7 @@
 		<input type="hidden" name="gonzo" value="{{ hash }}" />
 		<input type="submit" name="post" value="submit comment" />
 	</form>
+
 {% else %}
 	<p>Please <a href="/login/">log in</a> to post comments.</p>
 {% endif %}

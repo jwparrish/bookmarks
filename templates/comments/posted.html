@@ -3,8 +3,5 @@
 {% block head %}Comment Posted Successfully{% endblock %}
 {% block content %}
 	<p>Thank you for contributing.</p>
-	{% if object %}
-		<p><a href="/bookmark/{{ object.id }}/">
-			View your comment</a></p>
-	{% endif %}
+	<p><a href="/bookmark/{{ object.id }}/">View your comment</a></p>
 {% endblock %}
