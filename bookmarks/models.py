@@ -27,4 +27,3 @@ class SharedBookmark(models.Model):
 	users_voted = models.ManyToManyField(User)
 	def __str__(self):
 		return '%s, %s' % self.bookmark, self.votes
-		

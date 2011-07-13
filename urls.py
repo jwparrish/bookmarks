@@ -3,6 +3,9 @@ import os.path
 from django.conf.urls.defaults import *
 from bookmarks.views import *
 from django.views.generic.simple import direct_to_template
+from django.contrib import admin
+
+admin.autodiscover()
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -12,6 +15,9 @@ site_media = os.path.join(
 )
 
 urlpatterns = patterns('',
+	#Admin interface
+	(r'^admin/', include(admin.site.urls)),
+	
 	#Comments
 	(r'^comments/', include('django.contrib.comments.urls')),
 
