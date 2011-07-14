@@ -4,6 +4,7 @@ from django.conf.urls.defaults import *
 from bookmarks.views import *
 from django.views.generic.simple import direct_to_template
 from django.contrib import admin
+from bookmarks.feeds import *
 
 admin.autodiscover()
 
@@ -14,7 +15,17 @@ site_media = os.path.join(
 	os.path.dirname(__file__), 'site_media'
 )
 
+# Make sure you add the feeds dict before the urlpatterns object.
+feeds = {
+	'recent': RecentBookmarks
+}
+
+
 urlpatterns = patterns('',
+	#Feeds
+	(r'^feeds/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', 
+						{'feed_dict': feeds}),
+	
 	#Admin interface
 	(r'^admin/', include(admin.site.urls)),
 	
