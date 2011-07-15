@@ -17,7 +17,8 @@ site_media = os.path.join(
 
 # Make sure you add the feeds dict before the urlpatterns object.
 feeds = {
-	'recent': RecentBookmarks
+	'recent': RecentBookmarks,
+	'user' : UserBookmarks
 }
 
 
