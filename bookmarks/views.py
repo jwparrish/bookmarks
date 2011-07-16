@@ -10,6 +10,8 @@ from bookmarks.models import *
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from datetime import datetime, timedelta
+from django.db.models import Q
+
 
 def main_page(request):
 	shared_bookmarks = SharedBookmark.objects.order_by(
@@ -150,9 +152,12 @@ def search_page(request):
 		show_results = True
 		query = request.GET['query'].strip()
 		if query:
+			keywords = query.split()
+			q = Q()
+			for keyword in keywords:
+				q = q & Q(title__icontains=keyword)
 			form = SearchForm({'query' : query})
-			bookmarks = \
-				Bookmark.objects.filter (title__icontains=query)[:10]
+			bookmarks = Bookmark.objects.filter (q)[:10]
 	variables = RequestContext(request, { 
 		'form': form,
 		'bookmarks': bookmarks,
