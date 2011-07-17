@@ -1,6 +1,6 @@
 {% if bookmarks %}
 	<ul class="bookmarks">
-		{% for bookmark in bookmarks %}
+		{% for bookmark in bookmarks.object_list %}
 			<li>
 				<a href="{{ bookmark.link.url|escape }}" class="title">
 					{{ bookmark.title|escape }}</a>
@@ -35,7 +35,7 @@
 	</ul>
 	{% if show_paginator %}
 		<div class="paginator">
-		{% if has_prev %}
+			{% if has_prev %}
 				<a href="?page={{ prev_page }}">&laquo; Previous</a>
 			{% endif %}
 			{% if has_next %}
