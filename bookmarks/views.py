@@ -34,7 +34,7 @@ def user_page(request, username):
 	except:
 		page = 1
 	try:
-	#	bookmarks = paginator.page(page)
+		bookmarks = paginator.page(page)
 	except:
 		raise Http404
 	variables = RequestContext(request, {
