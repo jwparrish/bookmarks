@@ -29,3 +29,14 @@ class SharedBookmark(models.Model):
 	users_voted = models.ManyToManyField(User)
 	def __str__(self):
 		return '%s, %s' % self.bookmark, self.votes
+		
+class Friendship(models.Model):
+	from_friend = models.ForeignKey(User, related_name='friend_set')
+	to_friend = models.ForeignKey(User, related_name='to_friend_set')
+	def __str__(self):
+		return '%s, %s' % (
+			self.from_friend.username,
+			self.to_friend.username
+		)
+	class Meta:
+		unique_together = (('to_friend', 'from_friend'), )
