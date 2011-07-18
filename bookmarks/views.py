@@ -270,3 +270,16 @@ def bookmark_page(request, bookmark_id):
 	})
 	return render_to_response('bookmark_page.html', variables)
 	
+def friends_page(request, username):
+	user = get_object_or_404(User, username=username)
+	friends = [friendship.to_friend for friendship in user.friend_set.all()]
+	friend_bookmarks = Bookmark.objects.filter(user__in=friends).order_by('-id')
+	variables = RequestContext(request, {
+		'username': username,
+		'friends': friends,
+		'bookmarks': friend_bookmarks[:10],
+		'show_tags': True,
+		'show_user': True
+	})
+	return render_to_response('friends_page.html', variables)
+	
