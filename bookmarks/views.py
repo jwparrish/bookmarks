@@ -303,3 +303,25 @@ def friend_add(request):
 		)
 	else:
 		raise Http404
+		
+@login_required
+def friend_invite(request):
+	if request.method == 'POST':
+		form = FriendInviteForm(request.POST)
+		if form.is_valid():
+			invitation = Invitation(
+				name = form.cleaned_data['name'],
+				email = form.cleaned_data['email'],
+				code = User.objects.make_random_password(20),
+				sender = request.user
+			)
+			invitation.save()
+			invitation.send()
+			return HttpResponseRedirect('/friend/invite/')
+	else:
+		form = FriendInviteForm()
+	variables = RequestContext(request, {
+		'form': form
+	})
+	return render_to_response('friend_invite.html', variables)
+	
