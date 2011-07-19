@@ -153,3 +153,11 @@ LOGGING = {
 }
 
 LOGIN_URL = '/login/'
+
+SITE_HOST = '127.0.0.1:8000'
+DEFAULT_FROM_EMAIL = \
+	'Django Bookmarks <django.bookmarks@example.com>'
+EMAIL_HOST = 'mail.yourisp.com'
+EMAIL_PORT = ''
+EMAIL_HOST_USER = 'username+mail.yourisp.com'
+EMAIL_HOST_PASSWORD = ''
