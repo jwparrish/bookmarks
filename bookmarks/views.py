@@ -70,6 +70,25 @@ def register_page(request):
 				password=form.cleaned_data['password1'],
 				email=form.cleaned_data['email']
 			)
+			if 'invitation' in request.session:
+				#Retrieve the invitation object.
+				invitation = \
+					Invitation.objects.get(id=request.session['invitation'])
+				#Create friendship from user to sender.
+				friendship = Friendship(
+					from_friend=user,
+					to_friend=invitation.sender
+				)
+				friendship.save()
+				#Create friendship from sender to user.
+				friendship = Friendship(
+					from_friend=invitation.sender,
+					to_friend=user
+				)
+				friendship.save()
+				#Delete the invitation from the database and session.
+				invitation.delete()
+				del request.session['invitation']
 			return HttpResponseRedirect('/register/success/')
 	else:
 		form = RegistrationForm()
@@ -324,4 +343,9 @@ def friend_invite(request):
 		'form': form
 	})
 	return render_to_response('friend_invite.html', variables)
+	
+def friend_accept(request, code):
+	invitation = get_object_or_404(Invitation, code__exact=code)
+	request.session['invitation'] = invitation.id
+	return HttpResponseRedirect('/register/')
 	
