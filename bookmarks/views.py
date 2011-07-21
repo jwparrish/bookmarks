@@ -12,6 +12,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from datetime import datetime, timedelta
 from django.db.models import Q
 from django.core.paginator import Paginator
+from django.utils.translation import gettext as _
 
 ITEMS_PER_PAGE = 10
 
@@ -346,11 +347,11 @@ def friend_invite(request):
 			try:
 				invitation.send()
 				request.user.message_set.create(
-					message='An invitation was sent to %s.' % invitation.email
-				)
+					message=_('An invitation was sent to %(email)s.') % { 'email': invitation.email
+				})
 			except:
 				request.user.message_set.create(
-					message='There was an error while sending the invitation.'
+					message=_('There was an error while sending the invitation.')
 				)
 			return HttpResponseRedirect('/friend/invite/')
 	else:
