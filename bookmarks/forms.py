@@ -2,6 +2,7 @@ from django import forms
 import re
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
+from django.utils.translation import gettext_lazy as _
 
 class RegistrationForm(forms.Form):
 	username = forms.CharField(label='Username', max_length=30)
@@ -55,6 +56,6 @@ class SearchForm(forms.Form):
 	)
 	
 class FriendInviteForm(forms.Form):
-	name = forms.CharField(label='Friend\'s Name')
-	email = forms.EmailField(label='Friends\'s Email')
+	name = forms.CharField(label=_('Friend\'s Name'))
+	email = forms.EmailField(label=_('Friends\'s Email'))
 	
