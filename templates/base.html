@@ -31,5 +31,13 @@
 		</ul>
 	{% endif %}
 	{% block content %}{% endblock %}
+	<div id="footer">
+		Django Bookmarks <br />
+		Languages:
+		<a href="/i18n/setlang/?language=en">en</a>
+		<a href="/i18n/setlang/?language=de">de</a>
+		<br />
+		Current Language: {{ LANGUAGE_CODE }}
+	</div>
 </body>
 </html>
