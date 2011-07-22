@@ -36,7 +36,7 @@ msgstr ""
 
 #: .\templates\friend_invite.html.py:3 .\templates\friend_invite.html.py:4
 msgid "Invite A Friend"
-msgstr ""
+msgstr "Das Invite inf Friendinzane"
 
 #: .\templates\friend_invite.html.py:10
 msgid "send invite"

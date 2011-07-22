@@ -23,6 +23,9 @@ feeds = {
 
 
 urlpatterns = patterns('',
+	#i18n
+	(r'^i18n/', include('django.conf.urls.i18n')),
+	
 	#Friends
 	(r'^friends/(\w+)/$', friends_page),
 	(r'^friend/add/$', friend_add),
