@@ -13,6 +13,7 @@ from datetime import datetime, timedelta
 from django.db.models import Q
 from django.core.paginator import Paginator
 from django.utils.translation import gettext as _
+from django.views.decorators.cache import cache_page
 
 ITEMS_PER_PAGE = 10
 
@@ -162,6 +163,7 @@ def tag_page(request, tag_name):
 	})
 	return render_to_response('tag_page.html', variables)
 	
+@cache_page
 def tag_cloud_page(request):
 	MAX_WEIGHT = 5
 	tags = Tag.objects.order_by('name')

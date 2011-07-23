@@ -102,7 +102,9 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.csrf.CsrfResponseMiddleware',
+    'django.middleware.cache.CacheMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+    
 )
 
 ROOT_URLCONF = 'django_bookmarks.urls'
@@ -162,3 +164,10 @@ EMAIL_HOST = 'mail.yourisp.com'
 EMAIL_PORT = ''
 EMAIL_HOST_USER = 'username+mail.yourisp.com'
 EMAIL_HOST_PASSWORD = ''
+
+CACHES = {
+	'default': {
+		'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+	}
+}
+#CACHE_MIDDLEWARE_SECONDS = 60 * 5
