@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load bookmarks_filters %}
 
 {% block title %}Welcome to Django Bookmarks{% endblock %}
 {% block head %}Welcome to Django Bookmarks{% endblock %}
@@ -10,7 +11,7 @@
 
 {% block content %}
 	{% if user.username %}
-		<p>Welcome {{ user.username }}!
+		<p>Welcome {{ user.username|capitalize }}!
 			Here you can store and share bookmarks!</p>
 	{% else %}
 		<p>Welcome anonymous user!
